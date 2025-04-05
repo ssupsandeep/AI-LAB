@@ -1,0 +1,40 @@
+rules = {
+    "A": ["B", "C"],
+    "B": ["D"]
+}
+
+facts = ["A"]
+goal = "D"
+
+def forward_chaining(rules, facts):
+    inferred = set(facts)
+    added = True
+    while added:
+        added = False
+        for premise, conclusions in rules.items():
+            if premise in inferred:
+                for conclusion in conclusions:
+                    if conclusion not in inferred:
+                        inferred.add(conclusion)
+                        added = True
+    return list(inferred)
+
+def backward_chaining(rules, facts, goal):
+    if goal in facts:
+        return True
+    for premise, conclusions in rules.items():
+        if goal in conclusions:
+            if backward_chaining(rules, facts, premise):
+                return True
+    return False
+
+fc_result = forward_chaining(rules, facts)
+bc_result = backward_chaining(rules, facts, goal)
+
+print("forward_chaining_result:", fc_result)
+print("backward_chaining_result:", bc_result)
+
+
+OUTPUT :
+forward_chaining_result: ['A', 'D', 'B', 'C']
+backward_chaining_result: True
