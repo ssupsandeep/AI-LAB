@@ -1,0 +1,9 @@
+import numpy as np
+arr=np.array([12,4,56,7,29,10])
+sorted_arr=np.sort(arr)
+print("original array:",arr)
+print("sorted array:",sorted_arr)
+
+OUTPUT :
+original array: [12  4 56  7 29 10]
+sorted array: [ 4  7 10 12 29 56]
