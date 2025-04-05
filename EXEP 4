@@ -1,0 +1,53 @@
+import heapq
+
+def a_star(graph, start, goal, heuristic):
+    queue = []
+    heapq.heappush(queue, (0, start, [start]))
+    visited = set()
+
+    while queue:
+        cost, current, path = heapq.heappop(queue)
+
+        if current == goal:
+            return path, cost
+
+        if current in visited:
+            continue
+        visited.add(current)
+
+        for neighbor, edge_cost in graph[current]:
+            if neighbor not in visited:
+                total_cost = cost + edge_cost
+                estimated_cost = total_cost + heuristic[neighbor]
+                heapq.heappush(queue, (estimated_cost, neighbor, path + [neighbor]))
+
+    return None, float('inf')
+
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 2)],
+    'C': [('D', 4)],
+    'D': [('E', 2)],
+    'E': []
+}
+
+heuristic = {
+    'A': 5,
+    'B': 4,
+    'C': 6,
+    'D': 2,
+    'E': 0
+}
+
+start = 'A'
+goal = 'E'
+
+path, cost = a_star(graph, start, goal, heuristic)
+
+print("A* Search Path :", path)
+print("Total cost:", cost)
+
+
+OUTPUT :
+A* Search Path : ['A', 'B', 'D', 'E']
+Total cost: 11
