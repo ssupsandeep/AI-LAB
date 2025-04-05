@@ -1,0 +1,38 @@
+import pandas as pd
+
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [24, 30, 22],
+    'City': ['New York', 'Los Angeles', 'Chicago']
+}
+
+df = pd.DataFrame(data)
+
+print("Full DataFrame:")
+print(df)
+
+print("\nName column:")
+print(df['Name'])
+
+print("\nFirst row of the DataFrame:")
+print(df.loc[0])
+
+
+OUTPUT :
+Full DataFrame:
+      Name  Age         City
+0    Alice   24     New York
+1      Bob   30  Los Angeles
+2  Charlie   22      Chicago
+
+Name column:
+0      Alice
+1        Bob
+2    Charlie
+Name: Name, dtype: object
+
+First row of the DataFrame:
+Name       Alice
+Age           24
+City    New York
+Name: 0, dtype: object
